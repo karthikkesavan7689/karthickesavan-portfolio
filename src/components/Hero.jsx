@@ -11,8 +11,32 @@ const Hero = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             position: 'relative',
-            padding: '120px 0 60px'
+            padding: '120px 0 60px',
+            overflow: 'hidden'
         }}>
+            {/* Background Watermark */}
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '100%',
+                height: '100%',
+                zIndex: -1,
+                opacity: 0.02,
+                pointerEvents: 'none',
+                userSelect: 'none',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '25vw',
+                fontWeight: 900,
+                color: 'white',
+                letterSpacing: '0.01em'
+            }}>
+                DEV
+            </div>
+
             {/* Background Blobs */}
             <div style={{
                 position: 'absolute',
@@ -22,7 +46,7 @@ const Hero = () => {
                 height: '400px',
                 background: 'var(--primary)',
                 filter: 'blur(150px)',
-                opacity: 0.15,
+                opacity: 0.1,
                 zIndex: -1
             }} />
             <div style={{
@@ -33,37 +57,46 @@ const Hero = () => {
                 height: '400px',
                 background: 'var(--secondary)',
                 filter: 'blur(150px)',
-                opacity: 0.15,
+                opacity: 0.1,
                 zIndex: -1
             }} />
 
             <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr', textAlign: 'center' }}>
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 >
                     {/* Centered Profile Image */}
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        marginBottom: '2rem'
+                        marginBottom: '2.5rem'
                     }}>
                         <div style={{
-                            width: '180px',
-                            height: '180px',
+                            width: '200px',
+                            height: '200px',
                             borderRadius: '50%',
-                            padding: '8px',
+                            padding: '10px',
                             background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                            boxShadow: '0 0 40px rgba(99, 102, 241, 0.3)',
+                            boxShadow: '0 0 60px rgba(99, 102, 241, 0.3)',
                             position: 'relative'
                         }}>
+                            <div style={{
+                                position: 'absolute',
+                                inset: 0,
+                                borderRadius: '50%',
+                                background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                                opacity: 0.4,
+                                filter: 'blur(20px)',
+                                zIndex: -1
+                            }} />
                             <div style={{
                                 width: '100%',
                                 height: '100%',
                                 borderRadius: '50%',
                                 overflow: 'hidden',
-                                border: '4px solid var(--bg-dark)',
+                                border: '6px solid var(--bg-dark)',
                                 background: 'var(--bg-card)'
                             }}>
                                 <img
@@ -79,47 +112,53 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    <span className="section-label outfit" style={{
-                        marginBottom: '1.5rem',
-                        fontSize: '0.9rem',
-                        fontWeight: 800,
-                        background: 'rgba(99, 102, 241, 0.15)',
-                        border: '1px solid var(--primary)'
-                    }}>
-                        Full Stack Developer
-                    </span>
+                    <motion.span
+                        className="section-label outfit"
+                        style={{
+                            marginBottom: '2rem',
+                            fontSize: '0.9rem',
+                            fontWeight: 800,
+                            background: 'rgba(99, 102, 241, 0.1)',
+                            border: '1px solid rgba(99, 102, 241, 0.3)',
+                            padding: '8px 20px'
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        FULL STACK DEVELOPER
+                    </motion.span>
 
                     <h1 className="glow-text" style={{
-                        fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                        fontSize: 'clamp(3rem, 10vw, 7rem)',
                         fontWeight: 950,
-                        lineHeight: 1,
-                        marginBottom: '2rem',
-                        letterSpacing: '-0.02em',
+                        lineHeight: 0.9,
+                        marginBottom: '2.5rem',
+                        letterSpacing: '-0.04em',
                         textTransform: 'uppercase',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        gap: '10px'
                     }}>
                         <span style={{
-                            background: 'linear-gradient(to bottom, #fff, #ccc)',
+                            background: 'linear-gradient(to bottom, #fff, #94a3b8)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent'
                         }}>KARTHICKKESAVAN</span>
                         <span className="gradient-text" style={{
-                            fontSize: '1.2em',
-                            filter: 'drop-shadow(0 0 30px rgba(99, 102, 241, 0.4))'
+                            fontSize: '1.1em',
+                            filter: 'drop-shadow(0 0 40px rgba(99, 102, 241, 0.5))'
                         }}>SR</span>
                     </h1>
 
                     <p className="text-dim outfit" style={{
-                        fontSize: '1.25rem',
-                        maxWidth: '750px',
-                        margin: '0 auto 2.5rem',
-                        lineHeight: 1.8,
+                        fontSize: '1.4rem',
+                        maxWidth: '800px',
+                        margin: '0 auto 3rem',
+                        lineHeight: 1.6,
                         fontWeight: 400
                     }}>
-                        <span style={{ color: 'white', fontWeight: 700 }}>Hello, I am</span> <span style={{
+                        <span style={{ color: 'white', fontWeight: 700 }}>Crafting Digital</span> <span style={{
                             color: 'white',
                             fontWeight: 900,
                             letterSpacing: '0.05em',
@@ -128,26 +167,28 @@ const Hero = () => {
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             filter: 'drop-shadow(0 0 10px rgba(99, 102, 241, 0.3))'
-                        }}>KARTHICKKESAVAN SR</span>. <br />
-                        <span style={{ fontSize: '1.1rem' }}>I build modern, responsive web applications using the MERN stack and explore the frontiers of Cloud & Security.</span>
+                        }}>Excellence</span>. <br />
+                        <span style={{ fontSize: '1.2rem', opacity: 0.8 }}>MERN Stack Specialist • Cloud Explorer • Security Enthusiast</span>
                     </p>
 
-                    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '25px', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <motion.a
                             href="#projects"
                             className="btn btn-primary"
-                            whileHover={{ scale: 1.05 }}
+                            style={{ padding: '16px 35px', fontSize: '1.1rem' }}
+                            whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(99, 102, 241, 0.4)' }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            View My Work <ArrowRight size={20} />
+                            Explore Projects <ArrowRight size={22} />
                         </motion.a>
                         <motion.a
                             href="#contact"
                             className="btn glass-card"
-                            whileHover={{ scale: 1.05 }}
+                            style={{ padding: '16px 35px', fontSize: '1.1rem', background: 'rgba(255,255,255,0.03)' }}
+                            whileHover={{ scale: 1.05, background: 'rgba(255,255,255,0.05)' }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Contact Me
+                            Let's Connect
                         </motion.a>
                     </div>
                 </motion.div>
@@ -157,7 +198,7 @@ const Hero = () => {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
                 style={{
                     position: 'absolute',
                     bottom: '40px',
@@ -167,15 +208,16 @@ const Hero = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '8px'
+                    gap: '12px'
                 }}
             >
-                <span style={{ fontSize: '0.8rem', fontWeight: 500, letterSpacing: '1px' }}>SCROLL</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '3px', opacity: 0.6 }}>SCROLL</span>
                 <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
+                    animate={{ y: [0, 15, 0] }}
+                    transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                    style={{ color: 'var(--primary)' }}
                 >
-                    <ChevronDown size={20} />
+                    <ChevronDown size={24} />
                 </motion.div>
             </motion.div>
         </section>

@@ -4,101 +4,183 @@ import { Mail, Github, Linkedin, MessageSquare, Send } from 'lucide-react';
 
 const Contact = () => {
     const socialLinks = [
-        { icon: <Mail />, label: 'Email', value: 'karthickkesavan7689@gmail.com', href: 'mailto:karthickkesavan7689@gmail.com' },
-        { icon: <Github />, label: 'GitHub', value: '@kesavann7689', href: 'https://github.com/kesavann7689' },
-        { icon: <Linkedin />, label: 'LinkedIn', value: 'KARTHICKKESAVAN SR', href: 'https://www.linkedin.com/in/hariharan-s-92b566381' },
-        { icon: <MessageSquare />, label: 'WhatsApp', value: '+91 8072915370', href: 'https://wa.me/918072915370' },
+        { icon: <Mail />, label: 'Email', value: 'karthickkesavan7689@gmail.com', href: 'mailto:karthickkesavan7689@gmail.com', color: 'var(--primary)' },
+        { icon: <Github />, label: 'GitHub', value: '@kesavann7689', href: 'https://github.com/kesavann7689', color: 'white' },
+        { icon: <Linkedin />, label: 'LinkedIn', value: 'KARTHICKKESAVAN SR', href: 'https://www.linkedin.com/in/hariharan-s-92b566381', color: '#0077b5' },
+        { icon: <MessageSquare />, label: 'WhatsApp', value: '+91 8072915370', href: 'https://wa.me/918072915370', color: '#25d366' },
     ];
 
     return (
-        <section id="contact">
+        <section id="contact" style={{ position: 'relative', overflow: 'hidden', padding: '120px 0' }}>
+            {/* Background Watermark */}
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '100%',
+                height: '100%',
+                zIndex: -1,
+                opacity: 0.03,
+                pointerEvents: 'none',
+                userSelect: 'none',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '20vw',
+                fontWeight: 900,
+                color: 'white',
+                letterSpacing: '0.05em'
+            }}>
+                HELLO
+            </div>
+
             <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                    <span className="section-label">Connect</span>
-                    <h2 style={{ fontSize: '3rem', marginBottom: '15px' }}>Let's <span className="gradient-text">Talk</span></h2>
-                    <p className="text-dim">Interested in working together or just want to say hi?</p>
+                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <span className="section-label">Connect</span>
+                        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 850, marginBottom: '20px', letterSpacing: '-0.02em' }}>
+                            Let's <span className="gradient-text">Talk</span>
+                        </h2>
+                        <p className="text-dim" style={{ fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
+                            Interested in working together or just want to say hi? I'm always open to new opportunities.
+                        </p>
+                    </motion.div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '25px' }}>
                     {socialLinks.map((link, idx) => (
                         <motion.a
                             key={idx}
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
                             className="glass-card"
-                            style={{ padding: '30px', textAlign: 'center', textDecoration: 'none', color: 'inherit' }}
-                            whileHover={{ y: -10, borderColor: 'var(--primary)' }}
+                            style={{
+                                padding: '40px 30px',
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                color: 'inherit',
+                                border: '1px solid rgba(255,255,255,0.03)',
+                                background: 'rgba(255,255,255,0.01)'
+                            }}
+                            whileHover={{ y: -10, borderColor: link.color, background: 'rgba(255,255,255,0.03)' }}
                         >
                             <div style={{
-                                width: '50px',
-                                height: '50px',
-                                borderRadius: '50%',
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '18px',
                                 background: 'rgba(255,255,255,0.03)',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                margin: '0 auto 20px',
-                                color: 'var(--primary)',
-                                border: '1px solid var(--glass-border)'
+                                margin: '0 auto 25px',
+                                color: link.color,
+                                border: '1px solid var(--glass-border)',
+                                transition: 'var(--transition-smooth)'
                             }}>
-                                {link.icon}
+                                {React.cloneElement(link.icon, { size: 28 })}
                             </div>
-                            <h4 style={{ marginBottom: '8px', color: 'white' }}>{link.label}</h4>
-                            <p style={{ fontSize: '0.85rem', color: 'var(--text-dim)', wordBreak: 'break-all' }}>{link.value}</p>
+                            <h4 style={{ marginBottom: '10px', color: 'white', fontSize: '1.25rem', fontWeight: 700 }}>{link.label}</h4>
+                            <p style={{ fontSize: '0.9rem', color: 'var(--text-dim)', wordBreak: 'break-all', opacity: 0.8 }}>{link.value}</p>
                         </motion.a>
                     ))}
                 </div>
 
-                {/* Quick Contact Form Placeholder */}
+                {/* Quick Contact Form */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="glass-card"
-                    style={{ marginTop: '60px', padding: '40px', maxWidth: '800px', margin: '60px auto 0' }}
+                    style={{
+                        marginTop: '80px',
+                        padding: '60px',
+                        maxWidth: '900px',
+                        margin: '80px auto 0',
+                        border: '1px solid rgba(255,255,255,0.05)',
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }}
                 >
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        width: '200px',
+                        height: '200px',
+                        background: 'radial-gradient(circle at top right, var(--primary-glow), transparent 70%)',
+                        opacity: 0.3,
+                        pointerEvents: 'none'
+                    }} />
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '50px', position: 'relative' }}>
                         <div>
-                            <h3 style={{ marginBottom: '15px' }}>Have a question?</h3>
-                            <p className="text-dim">Fill out the form and I'll get back to you within 24 hours.</p>
+                            <h3 style={{ fontSize: '2rem', marginBottom: '20px', fontWeight: 800 }}>Have a question?</h3>
+                            <p className="text-dim" style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '30px' }}>
+                                Fill out the form and I'll get back to you as soon as possible.
+                            </p>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'var(--primary)', fontWeight: 700 }}>
+                                <div style={{ width: '40px', height: '2px', background: 'var(--primary)' }} />
+                                GET IN TOUCH
+                            </div>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                            <input
-                                type="text"
-                                placeholder="Your Name"
-                                style={{
-                                    padding: '12px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--glass-border)',
-                                    borderRadius: '10px', color: 'white', outline: 'none'
-                                }}
-                            />
-                            <input
-                                type="email"
-                                placeholder="Your Email"
-                                style={{
-                                    padding: '12px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--glass-border)',
-                                    borderRadius: '10px', color: 'white', outline: 'none'
-                                }}
-                            />
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                <input
+                                    type="text"
+                                    placeholder="Your Name"
+                                    className="contact-input"
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="Your Email"
+                                    className="contact-input"
+                                />
+                            </div>
                             <textarea
                                 placeholder="Your Message"
-                                rows="4"
-                                style={{
-                                    padding: '12px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--glass-border)',
-                                    borderRadius: '10px', color: 'white', outline: 'none', resize: 'none'
-                                }}
+                                rows="5"
+                                className="contact-input"
+                                style={{ resize: 'none' }}
                             />
-                            <button className="btn btn-primary" style={{ justifyContent: 'center' }}>
-                                Send Message <Send size={18} />
+                            <button className="btn btn-primary" style={{ justifyContent: 'center', width: '100%', height: '55px', fontSize: '1.1rem' }}>
+                                Send Message <Send size={20} />
                             </button>
                         </div>
                     </div>
                 </motion.div>
             </div>
+            <style>{`
+                .contact-input {
+                    padding: 16px 20px;
+                    background: rgba(255,255,255,0.03);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 12px;
+                    color: white;
+                    outline: none;
+                    font-size: 1rem;
+                    transition: var(--transition-smooth);
+                    font-family: inherit;
+                }
+                .contact-input:focus {
+                    background: rgba(255,255,255,0.05);
+                    border-color: var(--primary);
+                    box-shadow: 0 0 20px rgba(99,102,241,0.1);
+                }
+                @media (max-width: 640px) {
+                    .glass-card { padding: 40px 25px !important; }
+                    div[style*="gridTemplateColumns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+                }
+            `}</style>
         </section>
     );
 };
