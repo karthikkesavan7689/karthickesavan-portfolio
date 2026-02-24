@@ -52,11 +52,13 @@ function App() {
           background: var(--primary);
           top: -300px;
           left: -200px;
+          animation: float 20s infinite alternate;
         }
         .blob-2 {
           background: var(--secondary);
           bottom: -300px;
           right: -200px;
+          animation: float 25s infinite alternate-reverse;
         }
         .blob-3 {
           position: absolute;
@@ -69,11 +71,13 @@ function App() {
           filter: blur(180px);
           opacity: 0.08;
           z-index: -3;
+          animation: float 30s infinite alternate;
         }
         @keyframes float {
-          0% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(100px, 50px) scale(1.1); }
-          100% { transform: translate(-50px, 100px) scale(0.9); }
+          0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+          33% { transform: translate(100px, 50px) rotate(5deg) scale(1.1); }
+          66% { transform: translate(-50px, 100px) rotate(-5deg) scale(0.9); }
+          100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
       `}</style>
     </div>

@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, MessageSquare, Send } from 'lucide-react';
 
 const Contact = () => {
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [isSent, setIsSent] = useState(false);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSendMessage = (e) => {
+        e.preventDefault();
+        const { name, email, message } = formData;
+
+        // Basic validation
+        if (!name || !email || !message) return;
+
+        const subject = `New Portfolio Message from ${name}`;
+        const body = `Sender Name: ${name}\nSender Email: ${email}\n\nMessage Details:\n${message}`;
+        const mailtoUrl = `mailto:karthikkesavan7689@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoUrl;
+
+        // Visual feedback
+        setIsSent(true);
+        setTimeout(() => setIsSent(false), 5000);
+        setFormData({ name: '', email: '', message: '' });
+    };
+
     const socialLinks = [
-        { icon: <Mail />, label: 'Email', value: 'karthickkesavan7689@gmail.com', href: 'mailto:karthickkesavan7689@gmail.com', color: 'var(--primary)' },
+        { icon: <Mail />, label: 'Email', value: 'karthikkesavan7689@gmail.com', href: 'mailto:karthikkesavan7689@gmail.com', color: 'var(--primary)' },
         { icon: <Github />, label: 'GitHub', value: '@kesavann7689', href: 'https://github.com/kesavann7689', color: 'white' },
-        { icon: <Linkedin />, label: 'LinkedIn', value: 'KARTHICKKESAVAN SR', href: 'https://www.linkedin.com/in/hariharan-s-92b566381', color: '#0077b5' },
+        { icon: <Linkedin />, label: 'LinkedIn', value: 'KARTHIK KESAVAN', href: 'https://www.linkedin.com/in/karthik-kesavan-39907a3b3?utm_source=share_via&utm_content=profile&utm_medium=member_android', color: '#0077b5' },
         { icon: <MessageSquare />, label: 'WhatsApp', value: '+91 8072915370', href: 'https://wa.me/918072915370', color: '#25d366' },
     ];
 
@@ -21,7 +48,7 @@ const Contact = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: -1,
-                opacity: 0.03,
+                opacity: 0.02,
                 pointerEvents: 'none',
                 userSelect: 'none',
                 display: 'flex',
@@ -30,9 +57,10 @@ const Contact = () => {
                 fontSize: '20vw',
                 fontWeight: 900,
                 color: 'white',
-                letterSpacing: '0.05em'
+                letterSpacing: '-0.02em',
+                lineHeight: 1
             }}>
-                HELLO
+                CONTACT
             </div>
 
             <div className="container">
@@ -124,7 +152,7 @@ const Contact = () => {
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '50px', position: 'relative' }}>
                         <div>
-                            <h3 style={{ fontSize: '2rem', marginBottom: '20px', fontWeight: 800 }}>Have a question?</h3>
+                            <h3 style={{ fontSize: '2rem', marginBottom: '20px', fontWeight: 850 }}>Have a question?</h3>
                             <p className="text-dim" style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '30px' }}>
                                 Fill out the form and I'll get back to you as soon as possible.
                             </p>
@@ -133,48 +161,112 @@ const Contact = () => {
                                 GET IN TOUCH
                             </div>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                        <form onSubmit={handleSendMessage} style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                <input
-                                    type="text"
-                                    placeholder="Your Name"
-                                    className="contact-input"
-                                />
-                                <input
-                                    type="email"
-                                    placeholder="Your Email"
-                                    className="contact-input"
-                                />
+                                <motion.div
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.1 }}
+                                >
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Your Name"
+                                        value={formData.name}
+                                        className="contact-input"
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.2 }}
+                                >
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Your Email"
+                                        value={formData.email}
+                                        className="contact-input"
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </motion.div>
                             </div>
-                            <textarea
-                                placeholder="Your Message"
-                                rows="5"
-                                className="contact-input"
-                                style={{ resize: 'none' }}
-                            />
-                            <button className="btn btn-primary" style={{ justifyContent: 'center', width: '100%', height: '55px', fontSize: '1.1rem' }}>
-                                Send Message <Send size={20} />
-                            </button>
-                        </div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                <textarea
+                                    name="message"
+                                    placeholder="Your Message"
+                                    value={formData.message}
+                                    rows="5"
+                                    className="contact-input"
+                                    style={{ resize: 'none' }}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </motion.div>
+                            <motion.button
+                                type="submit"
+                                className="btn btn-primary"
+                                style={{
+                                    justifyContent: 'center',
+                                    width: '100%',
+                                    height: '60px',
+                                    fontSize: '1.1rem',
+                                    borderRadius: '16px',
+                                    background: isSent ? 'var(--accent)' : 'linear-gradient(135deg, var(--primary), var(--secondary))'
+                                }}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.4 }}
+                            >
+                                {isSent ? 'Message Prepared! ✅' : <>Send Message <Send size={20} style={{ marginLeft: '10px' }} /></>}
+                            </motion.button>
+                        </form>
                     </div>
                 </motion.div>
             </div>
             <style>{`
                 .contact-input {
-                    padding: 16px 20px;
-                    background: rgba(255,255,255,0.03);
-                    border: 1px solid var(--glass-border);
-                    border-radius: 12px;
+                    padding: 18px 25px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 16px;
                     color: white;
                     outline: none;
                     font-size: 1rem;
-                    transition: var(--transition-smooth);
-                    font-family: inherit;
+                    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    font-family: 'Inter', sans-serif;
+                    width: 100%;
+                }
+                .contact-input:hover {
+                    background: rgba(255, 255, 255, 0.04);
+                    border-color: rgba(255, 255, 255, 0.15);
                 }
                 .contact-input:focus {
-                    background: rgba(255,255,255,0.05);
+                    background: rgba(255, 255, 255, 0.05);
                     border-color: var(--primary);
-                    box-shadow: 0 0 20px rgba(99,102,241,0.1);
+                    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 0 20px rgba(99, 102, 241, 0.1);
+                    transform: translateY(-2px);
+                }
+                .contact-input::placeholder {
+                    color: rgba(255, 255, 255, 0.3);
+                    transition: var(--transition-smooth);
+                }
+                .contact-input:focus::placeholder {
+                    opacity: 0.5;
+                    transform: translateX(5px);
                 }
                 @media (max-width: 640px) {
                     .glass-card { padding: 40px 25px !important; }

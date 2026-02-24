@@ -41,7 +41,7 @@ const Certificates = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: -1,
-                opacity: 0.03,
+                opacity: 0.02,
                 pointerEvents: 'none',
                 userSelect: 'none',
                 display: 'flex',
@@ -50,9 +50,10 @@ const Certificates = () => {
                 fontSize: '20vw',
                 fontWeight: 900,
                 color: 'white',
-                letterSpacing: '0.05em'
+                letterSpacing: '-0.02em',
+                lineHeight: 1
             }}>
-                AWARD
+                AWARDS
             </div>
 
             <div className="container" style={{ marginBottom: '60px', textAlign: 'center' }}>

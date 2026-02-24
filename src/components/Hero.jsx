@@ -29,12 +29,13 @@ const Hero = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                fontSize: '25vw',
+                fontSize: '20vw',
                 fontWeight: 900,
                 color: 'white',
-                letterSpacing: '0.01em'
+                letterSpacing: '-0.02em',
+                lineHeight: 1
             }}>
-                DEV
+                WELCOME
             </div>
 
             {/* Background Blobs */}

@@ -42,7 +42,7 @@ const Projects = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: -1,
-                opacity: 0.03,
+                opacity: 0.02,
                 pointerEvents: 'none',
                 userSelect: 'none',
                 display: 'flex',
@@ -51,9 +51,10 @@ const Projects = () => {
                 fontSize: '20vw',
                 fontWeight: 900,
                 color: 'white',
-                letterSpacing: '0.05em'
+                letterSpacing: '-0.02em',
+                lineHeight: 1
             }}>
-                WORK
+                WORKS
             </div>
 
             <div className="container">

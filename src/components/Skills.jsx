@@ -9,7 +9,7 @@ const Skills = () => {
             icon: <Layout />,
             color: 'var(--primary)',
             colorRGB: '99, 102, 241',
-            skills: ['React', 'JavaScript (ES6+)', 'HTML5/CSS3', 'Modern UI/UX', 'State Management']
+            skills: ['React', 'JavaScript (ES6+)', 'HTML5/CSS3', 'Modern UI/UX']
         },
         {
             title: 'Backend & Databases',
@@ -29,7 +29,7 @@ const Skills = () => {
 
     return (
         <section id="skills" style={{ position: 'relative', overflow: 'hidden', padding: '120px 0' }}>
-            {/* Background Elements */}
+            {/* Background Watermark */}
             <div style={{
                 position: 'absolute',
                 top: '50%',
@@ -38,7 +38,7 @@ const Skills = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: -1,
-                opacity: 0.03,
+                opacity: 0.02,
                 pointerEvents: 'none',
                 userSelect: 'none',
                 display: 'flex',
@@ -47,7 +47,8 @@ const Skills = () => {
                 fontSize: '20vw',
                 fontWeight: 900,
                 color: 'white',
-                letterSpacing: '0.1em'
+                letterSpacing: '-0.02em',
+                lineHeight: 1
             }}>
                 TECH
             </div>

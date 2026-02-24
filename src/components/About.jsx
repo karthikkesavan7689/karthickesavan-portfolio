@@ -21,7 +21,7 @@ const About = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: -1,
-                opacity: 0.03,
+                opacity: 0.02,
                 pointerEvents: 'none',
                 userSelect: 'none',
                 display: 'flex',
@@ -30,7 +30,8 @@ const About = () => {
                 fontSize: '20vw',
                 fontWeight: 900,
                 color: 'white',
-                letterSpacing: '0.05em'
+                letterSpacing: '-0.02em',
+                lineHeight: 1
             }}>
                 ABOUT
             </div>
@@ -97,19 +98,21 @@ const About = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <span className="section-label">Biography</span>
-                            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '30px', lineHeight: 1.1, fontWeight: 850 }}>
+                            <span className="section-label outfit" style={{ letterSpacing: '2px', fontWeight: 800 }}>MYSELF</span>
+                            <h2 style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', marginBottom: '35px', lineHeight: 1.05, fontWeight: 900, letterSpacing: '-0.03em' }} className="outfit">
                                 Passion Meets <br />
-                                <span className="gradient-text">Purpose.</span>
+                                <span className="gradient-text" style={{ filter: 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.3))' }}>Purpose.</span>
                             </h2>
-                            <p className="text-dim" style={{ fontSize: '1.2rem', marginBottom: '25px', lineHeight: 1.8 }}>
-                                I'm a dedicated <span style={{ color: 'white', fontWeight: 600 }}>Full-Stack Developer</span> on a mission to build software that makes a difference.
-                                With a solid foundation in React and JavaScript, I focus on creating seamless user experiences
-                                backed by robust backend architectures.
+                            <p className="text-dim outfit" style={{ fontSize: '1.2rem', marginBottom: '25px', lineHeight: 1.8, fontWeight: 400, letterSpacing: '0.01em' }}>
+                                I am currently pursuing a <span style={{ color: 'white', fontWeight: 700, borderBottom: '2px solid var(--primary)' }}>Bachelor of Science in Mathematics</span>, where I have developed strong analytical and problem-solving skills.
+                                Alongside my academic studies, I have cultivated a deep interest in web development and am actively working toward becoming a <span style={{ color: 'var(--secondary)', fontWeight: 700, textShadow: '0 0 15px rgba(168, 85, 247, 0.4)' }}>MERN Stack Developer</span>.
                             </p>
-                            <p className="text-dim" style={{ fontSize: '1.2rem', marginBottom: '45px', lineHeight: 1.8 }}>
-                                Currently, I'm deep-diving into <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Cloud Computing</span> and <span style={{ color: 'var(--secondary)', fontWeight: 600 }}>Ethical Hacking</span> to ensure the solutions I build
-                                are not just powerful, but secure and scalable.
+                            <p className="text-dim outfit" style={{ fontSize: '1.2rem', marginBottom: '25px', lineHeight: 1.8, fontWeight: 400, letterSpacing: '0.01em' }}>
+                                I have been learning and practicing the core technologies of the MERN stack, including **MongoDB**, **Express.js**, **React**, and **Node.js**.
+                                At present, I possess a solid understanding of the fundamental concepts of front-end and back-end development, such as building responsive user interfaces, creating RESTful APIs, and working with databases.
+                            </p>
+                            <p className="text-dim outfit" style={{ fontSize: '1.2rem', marginBottom: '40px', lineHeight: 1.8, fontWeight: 400, letterSpacing: '0.01em' }}>
+                                I am passionate about creating efficient, user-friendly web applications and continuously strive to improve my technical abilities through hands-on practice.
                             </p>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
