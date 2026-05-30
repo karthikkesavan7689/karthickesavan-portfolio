@@ -119,36 +119,46 @@ const Hero = () => {
                             marginBottom: '2rem',
                             fontSize: '0.9rem',
                             fontWeight: 800,
-                            background: 'rgba(99, 102, 241, 0.1)',
-                            border: '1px solid rgba(99, 102, 241, 0.3)',
-                            padding: '8px 20px'
+                            background: 'rgba(15, 23, 42, 0.8)',
+                            border: '1px solid rgba(99, 102, 241, 0.5)',
+                            padding: '10px 24px',
+                            borderRadius: '30px',
+                            color: 'var(--primary)',
+                            boxShadow: '0 0 20px rgba(99, 102, 241, 0.2)',
+                            letterSpacing: '2px'
                         }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
                     >
                         FULL STACK DEVELOPER
                     </motion.span>
 
                     <h1 className="glow-text" style={{
-                        fontSize: 'clamp(3rem, 10vw, 7rem)',
+                        fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
                         fontWeight: 950,
-                        lineHeight: 0.9,
+                        lineHeight: 0.85,
                         marginBottom: '2.5rem',
-                        letterSpacing: '-0.04em',
+                        letterSpacing: '-0.05em',
                         textTransform: 'uppercase',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}>
                         <span style={{
-                            background: 'linear-gradient(to bottom, #fff, #94a3b8)',
+                            background: 'linear-gradient(to bottom, #fff 60%, rgba(255,255,255,0.4))',
                             WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent'
+                            WebkitTextFillColor: 'transparent',
+                            filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.1))'
                         }}>KARTHICKKESAVAN</span>
                         <span className="gradient-text" style={{
-                            fontSize: '1.1em',
-                            filter: 'drop-shadow(0 0 40px rgba(99, 102, 241, 0.5))'
+                            fontSize: '0.8em',
+                            display: 'block',
+                            marginTop: '0.1em',
+                            filter: 'drop-shadow(0 0 50px rgba(99, 102, 241, 0.8))',
+                            background: 'linear-gradient(135deg, #818cf8, #c084fc)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent'
                         }}>SR</span>
                     </h1>
 
