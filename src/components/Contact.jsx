@@ -5,50 +5,14 @@ import { Mail, Github, Linkedin, MessageSquare, Send } from 'lucide-react';
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [isSending, setIsSending] = useState(false);
-    const [isSent, setIsSent] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSendMessage = async (e) => {
-        e.preventDefault();
-        const { name, email, message } = formData;
-
-        // Basic validation
-        if (!name || !email || !message) return;
-
+    const handleSubmit = () => {
         setIsSending(true);
-
-        try {
-            const response = await fetch("https://formsubmit.co/ajax/karthikkesavan7689@gmail.com", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    message: message,
-                    _subject: `New Portfolio Message from ${name}`
-                })
-            });
-
-            if (response.ok) {
-                setIsSent(true);
-                setFormData({ name: '', email: '', message: '' });
-                setTimeout(() => setIsSent(false), 5000);
-            } else {
-                alert("Something went wrong. Please try again or use direct email.");
-            }
-        } catch (error) {
-            console.error("Error sending message:", error);
-            alert("Failed to send message. Please check your internet connection.");
-        } finally {
-            setIsSending(false);
-        }
     };
 
     const socialLinks = [
@@ -182,7 +146,17 @@ const Contact = () => {
                                 GET IN TOUCH
                             </div>
                         </div>
-                        <form onSubmit={handleSendMessage} style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+                        <form 
+                            action="https://formsubmit.co/karthikkesavan7689@gmail.com" 
+                            method="POST"
+                            onSubmit={handleSubmit}
+                            style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}
+                        >
+                            {/* FormSubmit Configuration */}
+                            <input type="hidden" name="_next" value="https://karthikkesavan7689.github.io/karthickesavan-portfolio/" />
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_template" value="table" />
+                            
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                                 <motion.div
                                     initial={{ opacity: 0, x: -20 }}
@@ -244,7 +218,7 @@ const Contact = () => {
                                     height: '60px',
                                     fontSize: '1.1rem',
                                     borderRadius: '16px',
-                                    background: isSent ? '#10B981' : isSending ? 'rgba(255,255,255,0.1)' : 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                                    background: isSending ? 'rgba(255,255,255,0.1)' : 'linear-gradient(135deg, var(--primary), var(--secondary))',
                                     cursor: isSending ? 'not-allowed' : 'pointer'
                                 }}
                                 whileHover={!isSending ? { scale: 1.02 } : {}}
@@ -254,7 +228,7 @@ const Contact = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.4 }}
                             >
-                                {isSending ? 'Sending Message...' : isSent ? 'Message Sent Successfully! ✅' : <>Send Message <Send size={20} style={{ marginLeft: '10px' }} /></>}
+                                {isSending ? 'Sending Message...' : <>Send Message <Send size={20} style={{ marginLeft: '10px' }} /></>}
                             </motion.button>
                         </form>
                     </div>
