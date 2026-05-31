@@ -4,6 +4,7 @@ import { Mail, Github, Linkedin, MessageSquare, Send } from 'lucide-react';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [isSending, setIsSending] = useState(false);
     const [isSent, setIsSent] = useState(false);
 
     const handleInputChange = (e) => {
@@ -11,23 +12,43 @@ const Contact = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSendMessage = (e) => {
+    const handleSendMessage = async (e) => {
         e.preventDefault();
         const { name, email, message } = formData;
 
         // Basic validation
         if (!name || !email || !message) return;
 
-        const subject = `New Portfolio Message from ${name}`;
-        const body = `Sender Name: ${name}\nSender Email: ${email}\n\nMessage Details:\n${message}`;
-        const mailtoUrl = `mailto:karthikkesavan7689@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setIsSending(true);
 
-        window.location.href = mailtoUrl;
+        try {
+            const response = await fetch("https://formsubmit.co/ajax/karthikkesavan7689@gmail.com", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    message: message,
+                    _subject: `New Portfolio Message from ${name}`
+                })
+            });
 
-        // Visual feedback
-        setIsSent(true);
-        setTimeout(() => setIsSent(false), 5000);
-        setFormData({ name: '', email: '', message: '' });
+            if (response.ok) {
+                setIsSent(true);
+                setFormData({ name: '', email: '', message: '' });
+                setTimeout(() => setIsSent(false), 5000);
+            } else {
+                alert("Something went wrong. Please try again or use direct email.");
+            }
+        } catch (error) {
+            console.error("Error sending message:", error);
+            alert("Failed to send message. Please check your internet connection.");
+        } finally {
+            setIsSending(false);
+        }
     };
 
     const socialLinks = [
@@ -213,25 +234,27 @@ const Contact = () => {
                                     required
                                 />
                             </motion.div>
-                            <motion.button
+                             <motion.button
                                 type="submit"
                                 className="btn btn-primary"
+                                disabled={isSending}
                                 style={{
                                     justifyContent: 'center',
                                     width: '100%',
                                     height: '60px',
                                     fontSize: '1.1rem',
                                     borderRadius: '16px',
-                                    background: isSent ? 'var(--accent)' : 'linear-gradient(135deg, var(--primary), var(--secondary))'
+                                    background: isSent ? '#10B981' : isSending ? 'rgba(255,255,255,0.1)' : 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                                    cursor: isSending ? 'not-allowed' : 'pointer'
                                 }}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
+                                whileHover={!isSending ? { scale: 1.02 } : {}}
+                                whileTap={!isSending ? { scale: 0.98 } : {}}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.4 }}
                             >
-                                {isSent ? 'Message Prepared! ✅' : <>Send Message <Send size={20} style={{ marginLeft: '10px' }} /></>}
+                                {isSending ? 'Sending Message...' : isSent ? 'Message Sent Successfully! ✅' : <>Send Message <Send size={20} style={{ marginLeft: '10px' }} /></>}
                             </motion.button>
                         </form>
                     </div>
